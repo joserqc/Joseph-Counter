@@ -129,6 +129,8 @@
 			this.tipCategoryIdx = 0;
 			this.tipIndexPerCat = {};
 			this.tipShown = false;
+			this.tipHistory = [];
+			this.tipHistoryPos = -1;
 
 			this.domObserver = null;
 		}
@@ -264,6 +266,23 @@
 
 			this.tipBanner = document.createElement('div');
 			this.tipBanner.className = 'jc-tip jc-hidden';
+
+			this.tipPrev = document.createElement('button');
+			this.tipPrev.className = 'jc-tip__nav jc-tip__nav--prev';
+			this.tipPrev.textContent = '◀';
+			this.tipPrev.title = 'Dica anterior';
+
+			this.tipText = document.createElement('span');
+			this.tipText.className = 'jc-tip__text';
+
+			this.tipNext = document.createElement('button');
+			this.tipNext.className = 'jc-tip__nav jc-tip__nav--next';
+			this.tipNext.textContent = '▶';
+			this.tipNext.title = 'Próxima dica';
+
+			this.tipBanner.appendChild(this.tipPrev);
+			this.tipBanner.appendChild(this.tipText);
+			this.tipBanner.appendChild(this.tipNext);
 
 			this.usageLine.appendChild(this.sessionGroup);
 			this.usageLine.appendChild(this.weeklyGroup);
@@ -537,6 +556,16 @@
 			return pool[idx % pool.length];
 		}
 
+		_displayTip(tipStr) {
+			this.tipBanner.classList.remove('jc-hidden');
+			this.tipText.style.opacity = '0';
+			this.tipPrev.classList.toggle('jc-tip__nav--disabled', this.tipHistoryPos <= 0);
+			setTimeout(() => {
+				this.tipText.textContent = tipStr;
+				this.tipText.style.opacity = '';
+			}, 150);
+		}
+
 		_showTip() {
 			if (!this.tipBanner) return;
 			if (this.tipShown) return;
@@ -545,8 +574,10 @@
 			const tip = this._pickNextTip();
 			if (!tip) return;
 
-			this.tipBanner.classList.remove('jc-hidden');
-			this.tipBanner.textContent = `${tip.emoji} ${tip.text}`;
+			const str = `${tip.emoji} ${tip.text}`;
+			this.tipHistory.push(str);
+			this.tipHistoryPos = this.tipHistory.length - 1;
+			this._displayTip(str);
 		}
 
 		rotateTip() {
@@ -554,11 +585,28 @@
 			const tip = this._pickNextTip();
 			if (!tip) return;
 
-			this.tipBanner.style.opacity = '0';
-			setTimeout(() => {
-				this.tipBanner.textContent = `${tip.emoji} ${tip.text}`;
-				this.tipBanner.style.opacity = '';
-			}, 200);
+			const str = `${tip.emoji} ${tip.text}`;
+			if (this.tipHistoryPos < this.tipHistory.length - 1) {
+				this.tipHistory.splice(this.tipHistoryPos + 1);
+			}
+			this.tipHistory.push(str);
+			this.tipHistoryPos = this.tipHistory.length - 1;
+			this._displayTip(str);
+		}
+
+		tipGoPrev() {
+			if (this.tipHistoryPos <= 0) return;
+			this.tipHistoryPos--;
+			this._displayTip(this.tipHistory[this.tipHistoryPos]);
+		}
+
+		tipGoNext() {
+			if (this.tipHistoryPos >= this.tipHistory.length - 1) {
+				this.rotateTip();
+				return;
+			}
+			this.tipHistoryPos++;
+			this._displayTip(this.tipHistory[this.tipHistoryPos]);
 		}
 
 		_updateMarkers() {

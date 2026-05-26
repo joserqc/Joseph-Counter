@@ -318,11 +318,17 @@
 	// Rotate tips every 30 seconds.
 	setInterval(() => ui.rotateTip(), 30000);
 
-	// Click to rotate tip immediately.
-	if (ui.tipBanner) {
-		ui.tipBanner.addEventListener('click', (e) => {
+	// Navigation buttons.
+	if (ui.tipPrev) {
+		ui.tipPrev.addEventListener('click', (e) => {
 			e.stopPropagation();
-			ui.rotateTip();
+			ui.tipGoPrev();
+		});
+	}
+	if (ui.tipNext) {
+		ui.tipNext.addEventListener('click', (e) => {
+			e.stopPropagation();
+			ui.tipGoNext();
 		});
 	}
 })();

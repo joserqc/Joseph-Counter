@@ -137,7 +137,7 @@
 			{ emoji: '🔍', text: 'EXPLAIN ANALYZE: veja o plano de execução real antes de otimizar consultas.' },
 			{ emoji: '💾', text: 'Supabase Storage: upload direto do client com RLS — sem precisar de backend.' },
 			{ emoji: '⏰', text: 'pg_cron: agende jobs SQL direto no Postgres — limpeza, agregações, manutenção.' },
-			{ emoji: '🔗', text: 'Custom JWT Hook (D-020): claims personalizadas no token para RLS multi-tenant.' },
+			{ emoji: '🔗', text: 'Custom JWT Hook: claims personalizadas no token para RLS multi-tenant.' },
 			{ emoji: '📊', text: 'getUser() > getSession(): getUser valida no servidor, getSession só lê o JWT local.' },
 			{ emoji: '🧩', text: '@supabase/ssr: auth com cookies para SSR no Next.js — sem flickering de sessão.' },
 			{ emoji: '🔄', text: 'Drizzle transactions: db.transaction(async (tx) => {...}) para operações atômicas.' },
@@ -165,7 +165,7 @@
 			{ emoji: '💾', text: 'Backup antes de deploy: pg_dump ou snapshot do Supabase — sempre.' },
 			{ emoji: '🔄', text: 'GitHub Actions: CI/CD que testa e deploya automaticamente a cada push.' },
 			{ emoji: '📊', text: 'Uptime monitoring: healthz endpoint + watchdog = alerta antes do cliente perceber.' },
-			{ emoji: '🌐', text: 'Cloudflare DNS-only para subdomínios de VPS: n8n.zexia.tech, honda.zexia.tech.' },
+			{ emoji: '🌐', text: 'Cloudflare DNS-only para subdomínios de VPS: separe apps com subdomínios dedicados.' },
 		],
 
 		// ── n8n & Automação ──────────────────────────────────────

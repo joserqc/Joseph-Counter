@@ -1,0 +1,153 @@
+/* Header: tokens + cache timer */
+.jc-header {
+	margin-top: 2px;
+	user-select: none;
+}
+
+.jc-headerItem {
+	white-space: nowrap;
+}
+
+/* Usage row: session + weekly */
+.jc-usageRow {
+	position: relative;
+	z-index: 50;
+	cursor: pointer;
+	user-select: none;
+	transition: opacity 150ms ease;
+}
+
+.jc-usageRow--dim {
+	opacity: 0.6;
+}
+
+.jc-usageGroup {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex: 1;
+	min-width: 0;
+}
+
+.jc-usageGroup--single {
+	width: 100%;
+}
+
+.jc-usageGroup--weekly {
+	justify-content: flex-end;
+}
+
+.jc-usageText {
+	white-space: nowrap;
+}
+
+/* Bars (mini + usage) */
+.jc-bar {
+	--jc-radius: 3px;
+	--jc-stroke: transparent;
+	--jc-fill: transparent;
+	--jc-fill-warn: var(--jc-fill);
+	--jc-marker: transparent;
+
+	position: relative;
+	box-sizing: border-box;
+	width: 100%;
+	height: 6px;
+	border-radius: var(--jc-radius);
+	border: 1px solid var(--jc-stroke);
+	overflow: visible;
+	user-select: none;
+}
+
+.jc-bar__fill {
+	width: 0%;
+	height: 100%;
+	background: var(--jc-fill);
+	transition: width 300ms ease, background-color 300ms ease;
+	border-top-left-radius: max(0px, calc(var(--jc-radius) - 1px));
+	border-bottom-left-radius: max(0px, calc(var(--jc-radius) - 1px));
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.jc-bar__fill.jc-full {
+	border-top-right-radius: max(0px, calc(var(--jc-radius) - 1px));
+	border-bottom-right-radius: max(0px, calc(var(--jc-radius) - 1px));
+}
+
+.jc-bar__fill.jc-warn {
+	background: var(--jc-fill-warn);
+}
+
+.jc-bar__marker {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0%;
+	width: 2px;
+	background: var(--jc-marker);
+	pointer-events: none;
+}
+
+.jc-bar--mini {
+	width: 60px;
+	height: 7px;
+	--jc-radius: 2px;
+}
+
+.jc-bar--usage {
+	height: 10px;
+	flex: 1;
+}
+
+/* Tooltips */
+.jc-tooltip {
+	position: fixed;
+	z-index: 9999;
+	padding: 4px 8px;
+	border-radius: 4px;
+	font-size: 12px;
+	white-space: pre-line;
+	user-select: none;
+	pointer-events: none;
+	opacity: 0;
+	transition: opacity 200ms ease;
+}
+
+.jc-tooltipTrigger {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	user-select: none;
+	cursor: help;
+}
+
+/* Tip banner */
+.jc-tip {
+	width: 100%;
+	padding: 4px 10px;
+	border-radius: 6px;
+	font-size: 11px;
+	line-height: 1.4;
+	text-align: center;
+	user-select: none;
+	cursor: pointer;
+	background: rgba(99, 102, 241, 0.1);
+	color: #818cf8;
+	opacity: 0;
+	animation: jc-tip-in 400ms ease forwards;
+	transition: opacity 200ms ease, background-color 200ms ease;
+}
+
+.jc-tip:hover {
+	background: rgba(99, 102, 241, 0.18);
+}
+
+@keyframes jc-tip-in {
+	from { opacity: 0; transform: translateY(-4px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hide optional elements completely (no layout space) */
+.jc-hidden {
+	display: none !important;
+}

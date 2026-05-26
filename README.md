@@ -9,8 +9,9 @@ Fork personalizado do [Claude Counter](https://github.com/she-llac/claude-counte
 - **Contagem de tokens** — Contagem aproximada de tokens da conversa atual, com mini barra de progresso
 - **Timer de cache** — Countdown mostrando quanto tempo a conversa permanece em cache
 - **Barras de uso** — Sessão (5h) e semanal (7 dias) com barras de progresso e countdown de reset
-- **155 dicas rotativas** — Dicas personalizadas que rotacionam a cada 30s (clique para trocar)
-- **Interface em Português** — Todos os textos e tooltips em PT-BR
+- **155 dicas rotativas** — Dicas personalizadas que rotacionam a cada 30s
+- **Navegação de dicas** — Botões ◀ ▶ para voltar/avançar no histórico de dicas
+- **Interface em Português** — Todos os textos e tooltips em PT-BR com acentuação correta
 
 ## Categorias de Dicas
 
@@ -34,6 +35,14 @@ Fork personalizado do [Claude Counter](https://github.com/she-llac/claude-counte
 1. Clone ou baixe este repositório
 2. Acesse `chrome://extensions` e ative o **Modo do desenvolvedor**
 3. Clique em **Carregar sem compactação** e selecione a pasta do projeto
+
+## Como funciona
+
+- Intercepta respostas da API do Claude para ler dados de conversa e uso
+- Usa tokenizador vendorizado (`o200k_base`) para contagem aproximada de tokens
+- Dicas rotacionam por categoria a cada 30 segundos
+- Botões ◀ ▶ navegam pelo histórico de dicas da sessão
+- Cada atualização de página traz dicas de uma categoria diferente
 
 ## Privacidade
 
